@@ -8,6 +8,9 @@ var dialect_sent = document.getElementById('dialect');
 
 var mobile = (/iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase()));
 
+standard_sent.textContent = '안녕하세요 NUGO 입니다.'
+dialect_sent.textContent = '안녕하십니꺼 NUGO 입니더'
+
 if(!mobile) {
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
     var recognition = new SpeechRecognition();
