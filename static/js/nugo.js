@@ -8,7 +8,7 @@ var dialect_sent = document.getElementById('dialect');
 
 var mobile = (/iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase()));
 
-standard_sent.textContent = '안녕하세요 NUGO 입니다.'
+standard_sent.value = '안녕하세요 NUGO 입니다.'
 dialect_sent.textContent = '안녕하십니꺼 NUGO 입니더'
 
 if(!mobile) {
@@ -42,7 +42,7 @@ if(!mobile) {
                 return;
             }
             if(event_object_list.results[event_last_idx].isFinal == true) {
-                standard_sent.textContent = transcript;
+                standard_sent.value = transcript;
                 standard_sent.style.color = '#000000';
                 recognition.stop();
             }
@@ -51,7 +51,7 @@ if(!mobile) {
                 for (var i = event_object_list.resultIndex; i < event_object_list.results.length; ++i) {
                     transcript += event_object_list.results[i][0].transcript;
                 }
-                standard_sent.textContent = transcript;
+                standard_sent.value = transcript;
                 standard_sent.style.color = '#666666';
             }
         };
