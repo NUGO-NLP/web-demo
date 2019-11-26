@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>NUGO</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+			<div id="wrapper" class="divided">
+                <section class="banner style1 orient-right content-align-left image-position-center onscroll-image-fade-in invert">
+                    <div class="content">
+                        <h1>NUGO</h1>
+                        <p><strong>Korean Standard-Dialect Translator</strong></p>
+                    </div>
+                    <div class="image">
+                        <img src="images/1.gif" alt="" />
+                    </div>
+                </section>
+                <section class="wrapper style1 align-center">
+                        <br><br><br><H1>Select &nbspyour &nbspregion</H1><br><br>
+                        <input type="radio" id="gyeongsang" name="region" checked/>
+                        <label for="gyeongsang">Gyeongsang</label>
+                        <input type="radio" id="jeolla" name="region"/>
+                        <label for="jeolla">Jeolla</label>
+                </section>
+
+                <section class="banner style1 orient-center content-align-center image-position-left fullscreen onload-image-fade-in onload-content-fade-left">
+                    <div class="content">
+                        <h2>Standard</h2>
+                        <div class="box">
+                            <textarea id="standard"></textarea>
+                        </div>
+                        <ul class="actions fit small">
+                            <li><a id="recognition" class="button primary icon solid fa-microphone">Recognition</a></li>
+                            <li><a id="translate" class="button primary icon solid fa-exchange-alt">Translate</a></li>
+                        </ul>
+                    </div>
+                    <div class="content">
+                        <h2>dialect</h2>
+                        <div class="box">
+                            <p id="dialect" align="left"></p>
+                        </div>
+                        <ul class="actions fit small">
+                            <li><a id="synthesis" class="button primary icon solid fa-volume-up">Synthesis</a></li>
+                        </ul>
+                    </div>
+                </section>
+			</div>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
+            <script src="js/nugo.js"></script>
+	</body>
+</html>
