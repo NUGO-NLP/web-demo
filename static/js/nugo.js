@@ -15,16 +15,18 @@ if(!mobile) {
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
     var recognition = new SpeechRecognition();
 }
-var synthesis = window.speechSynthesis;
-var voices = synthesis.getVoices();
-var utterance = new SpeechSynthesisUtterance('');
 
-for(i = 0; i < voices.length ; i++) {
-    if(voices[i].name === 'Google 한국의') {
-        utterance.voice = voices[i];
-        break;
-    }
-}
+var audio = new Audio();
+// var synthesis = window.speechSynthesis;
+// var voices = synthesis.getVoices();
+// var utterance = new SpeechSynthesisUtterance('');
+
+// for(i = 0; i < voices.length ; i++) {
+//     if(voices[i].name === 'Google 한국의') {
+//         utterance.voice = voices[i];
+//         break;
+//     }
+// }
 
 if(!mobile) {
     recognition.interimResults = true;
@@ -97,7 +99,17 @@ translate_btn.onclick = function() {
 };
 
 synthesis_btn.onclick = function() {
-    utterance.text = dialect_sent.textContent;
-    utterance.rate = 0.9;
-    synthesis.speak(utterance);
+    if(radio_gs_btn.checked == true) {
+        url = "http://211.34.105.98:6060/speech/stream/mp3?language=0&speaker=2&text="
+        audio.src = url + dialect_sent.textContent;
+        audio.play();
+    }
+    else {
+        url = "http://211.34.105.98:6060/speech/stream/mp3?language=0&speaker=4&text="
+        audio.src = url + dialect_sent.textContent;
+        audio.play();
+    }
+    // utterance.text = dialect_sent.textContent;
+    // utterance.rate = 0.9;
+    // synthesis.speak(utterance);
 }
