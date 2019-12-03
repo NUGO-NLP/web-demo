@@ -72,28 +72,17 @@ else {
 
 translate_btn.onclick = function() {
     var standard_text = standard_sent.value;
-    var data = {
-        'version':1,
-        'action':{
-            'parameters':{
-                'sentence':{
-                    'value':standard_text
-                }
-            }
-        }
-    }
 
     var xhr = new XMLHttpRequest();
     if(radio_gs_btn.checked == true) {
-        xhr.open('POST', '/convertIntoGyeongsang');
+        xhr.open('GET', '/dialect/gs?standard_text=' + standard_text);
     }
     else {
-        xhr.open('POST', '/convertIntoJeolla');
+        xhr.open('GET', '/dialect/jl?standard_text=' + standard_text);
     }
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
+    xhr.send();
     xhr.onload = function() {
-        var dialect_text = JSON.parse(xhr.responseText)['output']['dialect_sentence'];
+        var dialect_text = JSON.parse(xhr.responseText)['dialect_text'];
         dialect_sent.textContent = dialect_text;
     };
 };
