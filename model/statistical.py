@@ -18,6 +18,7 @@ class statisticalModel:
         self.word_dict = dict()
         self.sent_dict_subword = dict()
         self.word_dict_subword = dict()
+        self.additional_rule_dict = dict()
         
         self.sentence_data_filename = os.path.join(parent_path, 'data/sent_' + region + '_train.json')
         self.word_data_filename = os.path.join(parent_path, 'data/word_' + region + '_train.json')
@@ -29,6 +30,7 @@ class statisticalModel:
         self.sentence_dict_ex_filename = os.path.join(current_path, 'save/ex/statistical_sent_dict_' + region + '.json')
         self.word_dict_ex_filename = os.path.join(current_path, 'save/ex/statistical_word_dict_' + region + '.json')
         
+        self.additional_rule_filename = os.path.join(current_path, 'save/additional_rule_' + region + '.json')
 
         # If there is a dictionary created
         if os.path.isfile(self.sentence_dict_filename) and os.path.isfile(self.word_dict_filename) and \
@@ -112,6 +114,9 @@ class statisticalModel:
 
         with open(self.word_dict_ex_filename, 'w', encoding='UTF-8') as word_dict_ex_file:
             word_dict_ex_file.write(json.dumps(self.word_dict_subword, ensure_ascii=False, indent='\t'))
+        
+        with open(self.additional_rule_filename) as additional_rule_file:
+            self.additional_rule_dict = json.load(additional_rule_file)
 
     def load_dict(self):
         with open(self.sentence_dict_filename) as sentence_dict_file:
@@ -125,6 +130,9 @@ class statisticalModel:
 
         with open(self.word_dict_ex_filename) as word_dict_ex_file:
             self.word_dict_subword = json.load(word_dict_ex_file)
+        
+        with open(self.additional_rule_filename) as additional_rule_file:
+            self.additional_rule_dict = json.load(additional_rule_file)
 
     def inference_subword(self, word, sentence):
         max_sentence_list_len = 0
@@ -168,6 +176,12 @@ class statisticalModel:
             subword_infer = self.inference_subword(subword, sentence_subword)
             word_infer = word_infer + subword_infer
         return word_infer
+
+    def inference_word_by_rules(self, word):
+        for subword in self.additional_rule_dict.keys():
+            if subword in word:
+                return word.replace(subword, self.additional_rule_dict[subword])
+        return word
 
     def dot(self, x, y):
         ret = 0
@@ -240,7 +254,7 @@ class statisticalModel:
                 # just returns a word.
                 # You can use some neural network model for this part.
                 #return self.inference_word_by_subword(word, sentence)
-                return word
+                return self.inference_word_by_rules(word)
 
     def inference_sentence(self, sentence):
         sentence = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '', sentence)
